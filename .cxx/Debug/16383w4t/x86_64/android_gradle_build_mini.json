@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "C:\\Users\\mathe\\AndroidStudioProjects\\LPCounterYuGiOh2\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\mathe\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\Users\\mathe\\AndroidStudioProjects\\LPCounterYuGiOh2\\app\\.cxx\\Debug\\16383w4t\\x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\mathe\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\Users\\mathe\\AndroidStudioProjects\\LPCounterYuGiOh2\\app\\.cxx\\Debug\\16383w4t\\x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "lpcounter_yu_gi_oh::@6890427a1f51a3e7e1df": {
+      "artifactName": "lpcounter_yu_gi_oh",
+      "abi": "x86_64",
+      "output": "C:\\Users\\mathe\\AndroidStudioProjects\\LPCounterYuGiOh2\\app\\build\\intermediates\\cxx\\Debug\\16383w4t\\obj\\x86_64\\liblpcounter_yu_gi_oh.so",
+      "runtimeFiles": []
+    }
+  }
+}

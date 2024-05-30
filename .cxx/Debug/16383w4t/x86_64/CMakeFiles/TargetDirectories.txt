@@ -1,0 +1,3 @@
+C:/Users/mathe/AndroidStudioProjects/LPCounterYuGiOh2/app/.cxx/Debug/16383w4t/x86_64/CMakeFiles/lpcounter_yu_gi_oh.dir
+C:/Users/mathe/AndroidStudioProjects/LPCounterYuGiOh2/app/.cxx/Debug/16383w4t/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/mathe/AndroidStudioProjects/LPCounterYuGiOh2/app/.cxx/Debug/16383w4t/x86_64/CMakeFiles/rebuild_cache.dir

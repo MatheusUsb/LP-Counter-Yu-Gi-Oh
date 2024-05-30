@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Player 1 -->
+        <TextView
+            android:id="@+id/player1Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player 1"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/player1LifePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8000 LP"
+            android:textSize="34sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/player1AddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add LP" />
+
+            <Button
+                android:id="@+id/player1SubtractButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtract LP" />
+        </LinearLayout>
+
+        <!-- Player 2 -->
+        <TextView
+            android:id="@+id/player2Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player 2"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/player2LifePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8000 LP"
+            android:textSize="34sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/player2AddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add LP" />
+
+            <Button
+                android:id="@+id/player2SubtractButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtract LP" />
+        </LinearLayout>
+
+        <!-- Player 3 -->
+        <TextView
+            android:id="@+id/player3Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player 3"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/player3LifePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8000 LP"
+            android:textSize="34sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/player3AddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add LP" />
+
+            <Button
+                android:id="@+id/player3SubtractButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtract LP" />
+        </LinearLayout>
+
+        <!-- Player 4 -->
+        <TextView
+            android:id="@+id/player4Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player 4"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/player4LifePoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8000 LP"
+            android:textSize="34sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/player4AddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add LP" />
+
+            <Button
+                android:id="@+id/player4SubtractButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtract LP" />
+        </LinearLayout>
+
+        <!-- Timer view -->
+        <TextView
+            android:id="@+id/timerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="03:00"
+            android:textSize="34sp" />
+
+        <!-- Timer control buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/startPauseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start" />
+
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reset" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

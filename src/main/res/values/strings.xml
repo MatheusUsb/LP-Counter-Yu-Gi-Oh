@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LP Counter - Yu-Gi-Oh</string>
+    <string name="select_player_number">Select the number of players</string>
+
+    <string-array name="player_numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Rest of your strings -->
+</resources>

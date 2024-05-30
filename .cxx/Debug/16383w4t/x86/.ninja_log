@@ -1,0 +1,9 @@
+# ninja log v5
+0	58	0	clean	9458e918eb7f7db4
+0	65	0	clean	9458e918eb7f7db4
+0	1492	7387324732005171	CMakeFiles/lpcounter_yu_gi_oh.dir/native-lib.cpp.o	cf7eef3d1fa73385
+1505	1905	7387324736173060	C:/Users/mathe/AndroidStudioProjects/LPCounterYuGiOh2/app/build/intermediates/cxx/Debug/16383w4t/obj/x86/liblpcounter_yu_gi_oh.so	9cc0c20d242c8f0e
+0	49	0	clean	9458e918eb7f7db4
+0	49	0	clean	9458e918eb7f7db4
+8	2689	7388127305535261	CMakeFiles/lpcounter_yu_gi_oh.dir/native-lib.cpp.o	cf7eef3d1fa73385
+2690	3510	7388127313950273	C:/Users/mathe/AndroidStudioProjects/LPCounterYuGiOh2/app/build/intermediates/cxx/Debug/16383w4t/obj/x86/liblpcounter_yu_gi_oh.so	9cc0c20d242c8f0e
