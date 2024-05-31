@@ -147,7 +147,7 @@ public class LpCalculatorActivity extends AppCompatActivity {
 
     private void openDialog(final boolean isAdding, final int playerIndex) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(isAdding ? "Adicionar pontos de vida" : "Subtrair pontos de vida");
+        builder.setTitle(isAdding ? "Enter the gain" : "Enter the damage");
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
