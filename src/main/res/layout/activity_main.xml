@@ -5,20 +5,23 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/efeito1" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="363dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:background="#C1160329"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="228dp"
         android:text="@string/select_player_number"
         android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/player_spinner"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,11 +29,9 @@
         android:id="@+id/player_spinner"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
-        android:background="#C1160329"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="8dp"
         android:textColor="#801C1C"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView" />
 
@@ -38,10 +39,8 @@
         android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="#C1160329"
+        android:layout_marginStart="140dp"
         android:text="Confirm"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/player_spinner" />
 
