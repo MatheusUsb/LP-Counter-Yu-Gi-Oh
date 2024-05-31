@@ -40,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up the spinner for selecting the number of players
         Spinner playerSpinner = findViewById(R.id.player_spinner);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item) {
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.layout.spinner_item) {
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView textView = (TextView) view;
-                textView.setTextColor(Color.WHITE);
+                // Set the text color for the dropdown items to white
+                textView.setTextColor(Color.BLACK);
                 return view;
             }
 
@@ -53,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView textView = (TextView) view;
+                // Keep the text color for the selected item as white
                 textView.setTextColor(Color.WHITE);
                 return view;
             }
         };
 
+        Spinner spinner = (Spinner) findViewById(R.id.player_spinner);
+        spinner.setAdapter(adapter);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter.addAll(getResources().getStringArray(R.array.player_numbers));
         playerSpinner.setAdapter(adapter);

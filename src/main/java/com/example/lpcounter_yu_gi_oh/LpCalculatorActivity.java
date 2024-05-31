@@ -32,37 +32,67 @@ public class LpCalculatorActivity extends AppCompatActivity {
         int numPlayers = getIntent().getIntExtra("numPlayers", 4);
         playerNames = getIntent().getStringArrayExtra("playerNames");
 
-        // Initialize the arrays
-        lifePoints = new int[numPlayers];
-        lifePointViews = new TextView[numPlayers];
-        playerNameViews = new TextView[numPlayers]; // Initialize the array for the player name views
-        addButtons = new Button[numPlayers];
-        subtractButtons = new Button[numPlayers];
+// Initialize the arrays
+        lifePoints = new int[4];
+        lifePointViews = new TextView[4];
+        playerNameViews = new TextView[4]; // Initialize the array for the player name views
+        addButtons = new Button[4];
+        subtractButtons = new Button[4];
 
+        for (int i = 0; i < 4; i++) {
+            if (i < numPlayers) {
+                final int finalI = i;
+                lifePoints[i] = 8000;
+
+                // Get the TextView for the player name and set the player name
+                playerNameViews[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "Name", "id", getPackageName()));
+                playerNameViews[i].setText(playerNames[i]);
+
+                lifePointViews[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "LifePoints", "id", getPackageName()));
+                updateLifePoints(i);
+
+                addButtons[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "AddButton", "id", getPackageName()));
+                addButtons[i].setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        openDialog(true, finalI);
+                    }
+                });
+
+                subtractButtons[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "SubtractButton", "id", getPackageName()));
+                subtractButtons[i].setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        openDialog(false, finalI);
+                    }
+                });
+
+                playerNameViews[i].setVisibility(View.VISIBLE);
+                lifePointViews[i].setVisibility(View.VISIBLE);
+                addButtons[i].setVisibility(View.VISIBLE);
+                subtractButtons[i].setVisibility(View.VISIBLE);
+            } else {
+                playerNameViews[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "Name", "id", getPackageName()));
+                lifePointViews[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "LifePoints", "id", getPackageName()));
+                addButtons[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "AddButton", "id", getPackageName()));
+                subtractButtons[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "SubtractButton", "id", getPackageName()));
+
+                playerNameViews[i].setVisibility(View.GONE);
+                lifePointViews[i].setVisibility(View.GONE);
+                addButtons[i].setVisibility(View.GONE);
+                subtractButtons[i].setVisibility(View.GONE);
+            }
+        }
         for (int i = 0; i < numPlayers; i++) {
-            final int finalI = i;
-            lifePoints[i] = 8000;
+            playerNameViews[i].setVisibility(View.VISIBLE);
+            lifePointViews[i].setVisibility(View.VISIBLE);
+            addButtons[i].setVisibility(View.VISIBLE);
+            subtractButtons[i].setVisibility(View.VISIBLE);
+        }
 
-            // Get the TextView for the player name and set the player name
-            playerNameViews[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "Name", "id", getPackageName()));
-            playerNameViews[i].setText(playerNames[i]);
-
-            lifePointViews[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "LifePoints", "id", getPackageName()));
-            updateLifePoints(i);
-
-            addButtons[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "AddButton", "id", getPackageName()));
-            addButtons[i].setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    openDialog(true, finalI);
-                }
-            });
-
-            subtractButtons[i] = findViewById(getResources().getIdentifier("player" + (i+1) + "SubtractButton", "id", getPackageName()));
-            subtractButtons[i].setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    openDialog(false, finalI);
-                }
-            });
+        for (int i = numPlayers; i < 4; i++) {
+            if(playerNameViews[i] != null) playerNameViews[i].setVisibility(View.GONE);
+            if(lifePointViews[i] != null) lifePointViews[i].setVisibility(View.GONE);
+            if(addButtons[i] != null) addButtons[i].setVisibility(View.GONE);
+            if(subtractButtons[i] != null) subtractButtons[i].setVisibility(View.GONE);
         }
 
         // Initialize the timer view

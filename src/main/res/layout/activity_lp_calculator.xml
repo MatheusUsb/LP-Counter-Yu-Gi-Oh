@@ -79,8 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player 3"
-            android:textSize="24sp"
-            android:visibility="gone" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/player3LifePoints"
@@ -113,8 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player 4"
-            android:textSize="24sp"
-            android:visibility="gone" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/player4LifePoints"
