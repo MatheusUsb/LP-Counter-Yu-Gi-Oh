@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player 1"
+            android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
         <TextView
@@ -23,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8000 LP"
+            android:textColor="#FFFFFF"
             android:textSize="34sp" />
 
         <LinearLayout
@@ -50,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player 2"
+            android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
         <TextView
@@ -57,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8000 LP"
+            android:textColor="#FFFFFF"
             android:textSize="34sp" />
 
         <LinearLayout
@@ -84,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player 3"
+            android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
         <TextView
@@ -91,6 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8000 LP"
+            android:textColor="#FFFFFF"
             android:textSize="34sp" />
 
         <LinearLayout
@@ -118,6 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player 4"
+            android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
         <TextView
@@ -125,6 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8000 LP"
+            android:textColor="#FFFFFF"
             android:textSize="34sp" />
 
         <LinearLayout
@@ -152,6 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="03:00"
+            android:textColor="#FFFFFF"
             android:textSize="34sp" />
 
         <!-- Timer control buttons -->
