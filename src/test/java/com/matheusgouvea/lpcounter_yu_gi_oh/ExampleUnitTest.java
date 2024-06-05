@@ -1,4 +1,4 @@
-package com.example.lpcounter_yu_gi_oh;
+package com.matheusgouvea.lpcounter_yu_gi_oh;
 
 import org.junit.Test;
 

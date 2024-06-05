@@ -1,4 +1,4 @@
-package com.example.lpcounter_yu_gi_oh;
+package com.matheusgouvea.lpcounter_yu_gi_oh;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,7 @@ import android.text.InputType;
 import android.widget.EditText;
 import android.content.DialogInterface;
 
-import com.example.lpcounter_yu_gi_oh.databinding.ActivityMainBinding;
+import com.matheusgouvea.lpcounter_yu_gi_oh.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

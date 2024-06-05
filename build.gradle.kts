@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.lpcounter_yu_gi_oh"
+    namespace = "com.matheusgouvea.lpcounter_yu_gi_oh"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.lpcounter_yu_gi_oh"
+        applicationId = "com.matheusgouvea.lpcounter_yu_gi_oh"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

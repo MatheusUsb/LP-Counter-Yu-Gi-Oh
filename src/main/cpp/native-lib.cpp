@@ -2,7 +2,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_lpcounter_1yu_1gi_1oh_MainActivity_stringFromJNI(
+Java_com_matheusgouvea_lpcounter_yu_gi_oh_MainActivity_stringFromJNI(
         JNIEnv* env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
