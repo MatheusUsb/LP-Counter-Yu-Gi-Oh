@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.text.InputType;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LpCalculatorActivity extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class LpCalculatorActivity extends AppCompatActivity {
         int numPlayers = getIntent().getIntExtra("numPlayers", 4);
         playerNames = getIntent().getStringArrayExtra("playerNames");
 
-// Initialize the arrays
+        // Initialize the arrays
         lifePoints = new int[4];
         lifePointViews = new TextView[4];
         playerNameViews = new TextView[4]; // Initialize the array for the player name views
@@ -186,11 +187,16 @@ public class LpCalculatorActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int value = Integer.parseInt(input.getText().toString());
-                if (isAdding) {
-                    addLifePoints(playerIndex, value);
+                String inputValue = input.getText().toString();
+                if (!inputValue.isEmpty()) {
+                    int value = Integer.parseInt(inputValue);
+                    if (isAdding) {
+                        addLifePoints(playerIndex, value);
+                    } else {
+                        subtractLifePoints(playerIndex, value);
+                    }
                 } else {
-                    subtractLifePoints(playerIndex, value);
+                    Toast.makeText(LpCalculatorActivity.this, "Please, insert a value", Toast.LENGTH_SHORT).show();
                 }
             }
         });
