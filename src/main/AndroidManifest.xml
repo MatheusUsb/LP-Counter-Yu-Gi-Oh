@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.matheusgouvea.lpcounter_yu_gi_oh"
     xmlns:tools="http://schemas.android.com/tools">
@@ -22,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.matheusgouvea.lpcounter_yu_gi_oh.LpCalculatorActivity" />
+        <activity
+            android:name="com.matheusgouvea.lpcounter_yu_gi_oh.LpCalculatorActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
