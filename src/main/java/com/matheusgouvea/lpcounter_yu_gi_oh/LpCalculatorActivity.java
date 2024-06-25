@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.text.InputType;
 import android.view.inputmethod.EditorInfo;
 import androidx.appcompat.app.AppCompatActivity;
+import android.media.MediaPlayer; // Importação necessária para o MediaPlayer
 
 public class LpCalculatorActivity extends AppCompatActivity {
     private int[] lifePoints;
@@ -21,23 +22,22 @@ public class LpCalculatorActivity extends AppCompatActivity {
     private TextView timerView;
     private CountDownTimer countDownTimer;
     private boolean isPaused = true;
-    private long timeLeft = 180000; // 3 minutes in milliseconds
+    private long timeLeft = 18000; // 3 minutes in milliseconds
     private String[] playerNames; // New array for player names
     private TextView[] playerNameViews; // New array for TextViews displaying player names
+    private boolean soundPlayed = false; // Controle para tocar o som uma única vez
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lp_calculator);
 
-        // Get the number of players and the player names from the Intent
         int numPlayers = getIntent().getIntExtra("numPlayers", 4);
         playerNames = getIntent().getStringArrayExtra("playerNames");
 
-        // Initialize the arrays
         lifePoints = new int[numPlayers];
         lifePointViews = new TextView[numPlayers];
-        playerNameViews = new TextView[numPlayers]; // Initialize the array for the player name views
+        playerNameViews = new TextView[numPlayers];
         addButtons = new Button[numPlayers];
         subtractButtons = new Button[numPlayers];
 
@@ -45,7 +45,6 @@ public class LpCalculatorActivity extends AppCompatActivity {
             final int finalI = i;
             lifePoints[i] = 8000;
 
-            // Get the TextView for the player name and set the player name
             playerNameViews[i] = findViewById(getResources().getIdentifier("player" + (i + 1) + "Name", "id", getPackageName()));
             playerNameViews[i].setText(playerNames[i]);
 
@@ -64,15 +63,13 @@ public class LpCalculatorActivity extends AppCompatActivity {
             subtractButtons[i].setVisibility(View.VISIBLE);
         }
 
-        // Adjust visibility based on the number of players
-        for (int i = numPlayers; i < 4; i++) { // Assuming a maximum of 4 players
+        for (int i = numPlayers; i < 4; i++) {
             findViewById(getResources().getIdentifier("player" + (i + 1) + "Name", "id", getPackageName())).setVisibility(View.GONE);
             findViewById(getResources().getIdentifier("player" + (i + 1) + "LifePoints", "id", getPackageName())).setVisibility(View.GONE);
             findViewById(getResources().getIdentifier("player" + (i + 1) + "AddButton", "id", getPackageName())).setVisibility(View.GONE);
             findViewById(getResources().getIdentifier("player" + (i + 1) + "SubtractButton", "id", getPackageName())).setVisibility(View.GONE);
         }
 
-        // Initialize the timer view and buttons
         timerView = findViewById(R.id.timerView);
         startPauseButton = findViewById(R.id.startPauseButton);
         resetButton = findViewById(R.id.resetButton);
@@ -100,6 +97,11 @@ public class LpCalculatorActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished;
                 updateTimer();
+
+                if (millisUntilFinished <= 10000 && !isPaused && !soundPlayed) {
+                    playAlertSound();
+                    soundPlayed = true;
+                }
             }
 
             public void onFinish() {
@@ -109,6 +111,13 @@ public class LpCalculatorActivity extends AppCompatActivity {
 
         isPaused = false;
         resetButton.setEnabled(true);
+        soundPlayed = false;
+    }
+
+    private void playAlertSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(LpCalculatorActivity.this, R.raw.time); // Alterado de piano para time
+        mediaPlayer.setOnCompletionListener(mp -> mp.release());
+        mediaPlayer.start();
     }
 
     private void pauseTimer() {
@@ -133,6 +142,7 @@ public class LpCalculatorActivity extends AppCompatActivity {
         isPaused = true;
         startPauseButton.setText("Start");
         resetButton.setEnabled(false);
+        soundPlayed = false;
     }
 
     private void updateTimer() {
