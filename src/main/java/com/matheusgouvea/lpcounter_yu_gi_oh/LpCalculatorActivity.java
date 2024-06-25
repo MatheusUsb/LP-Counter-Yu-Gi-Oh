@@ -12,20 +12,21 @@ import android.content.DialogInterface;
 import android.text.InputType;
 import android.view.inputmethod.EditorInfo;
 import androidx.appcompat.app.AppCompatActivity;
-import android.media.MediaPlayer; // Importação necessária para o MediaPlayer
+import android.media.MediaPlayer;
+import android.view.WindowManager;
 
 public class LpCalculatorActivity extends AppCompatActivity {
     private int[] lifePoints;
     private TextView[] lifePointViews;
     private Button[] addButtons, subtractButtons;
-    private Button startPauseButton, resetButton;
+    private Button startPauseButton, resetButton, resetGameButton;
     private TextView timerView;
     private CountDownTimer countDownTimer;
     private boolean isPaused = true;
-    private long timeLeft = 18000; // 3 minutes in milliseconds
-    private String[] playerNames; // New array for player names
-    private TextView[] playerNameViews; // New array for TextViews displaying player names
-    private boolean soundPlayed = false; // Controle para tocar o som uma única vez
+    private long timeLeft = 180000; // 3 minutes in milliseconds
+    private String[] playerNames;
+    private TextView[] playerNameViews;
+    private boolean soundPlayed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class LpCalculatorActivity extends AppCompatActivity {
         timerView = findViewById(R.id.timerView);
         startPauseButton = findViewById(R.id.startPauseButton);
         resetButton = findViewById(R.id.resetButton);
+        resetGameButton = findViewById(R.id.resetGameButton);
 
         startPauseButton.setOnClickListener(v -> {
             if (isPaused) {
@@ -83,6 +85,7 @@ public class LpCalculatorActivity extends AppCompatActivity {
                     resumeTimer();
                     startPauseButton.setText("Pause");
                 }
+                resetButton.setEnabled(true); // Habilita o botão de reset quando o temporizador é iniciado
             } else {
                 pauseTimer();
                 startPauseButton.setText("Resume");
@@ -90,6 +93,64 @@ public class LpCalculatorActivity extends AppCompatActivity {
         });
 
         resetButton.setOnClickListener(v -> resetTimer());
+        resetGameButton.setOnClickListener(v -> resetGame());
+    }
+
+    private void updateLifePoints(int playerIndex) {
+        lifePointViews[playerIndex].setText(String.valueOf(lifePoints[playerIndex]));
+    }
+
+    private void openDialog(boolean isAdding, int playerIndex) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(isAdding ? "Add Life Points" : "Subtract Life Points");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        input.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            try {
+                int value = Integer.parseInt(input.getText().toString());
+                if (isAdding) {
+                    lifePoints[playerIndex] += value;
+                } else {
+                    lifePoints[playerIndex] -= value;
+                }
+                updateLifePoints(playerIndex);
+            } catch (NumberFormatException e) {
+                Toast.makeText(LpCalculatorActivity.this, "Invalid number", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        AlertDialog dialog = builder.create();
+
+        // Handling the keyboard "OK" action
+        input.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                try {
+                    int value = Integer.parseInt(input.getText().toString());
+                    if (isAdding) {
+                        lifePoints[playerIndex] += value;
+                    } else {
+                        lifePoints[playerIndex] -= value;
+                    }
+                    updateLifePoints(playerIndex);
+                    dialog.dismiss(); // Dismiss the dialog after the action
+                } catch (NumberFormatException e) {
+                    Toast.makeText(LpCalculatorActivity.this, "Invalid number", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+            return false;
+        });
+
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE); // Ensure the keyboard is shown
+        input.requestFocus(); // Request focus for the input
+
+        dialog.show();
     }
 
     private void startTimer() {
@@ -98,40 +159,36 @@ public class LpCalculatorActivity extends AppCompatActivity {
                 timeLeft = millisUntilFinished;
                 updateTimer();
 
-                if (millisUntilFinished <= 10000 && !isPaused && !soundPlayed) {
-                    playAlertSound();
-                    soundPlayed = true;
+                if (timeLeft <= 10900 && !soundPlayed) { // 10 segundos ou menos e a música ainda não foi reproduzida
+                    MediaPlayer mediaPlayer = MediaPlayer.create(LpCalculatorActivity.this, R.raw.time);
+                    mediaPlayer.start();
+                    soundPlayed = true; // Garante que a música não seja reproduzida mais de uma vez
                 }
             }
 
             public void onFinish() {
                 timerView.setText("00:00");
+                if (!soundPlayed) {
+                    MediaPlayer mediaPlayer = MediaPlayer.create(LpCalculatorActivity.this, R.raw.time);
+                    mediaPlayer.start();
+                    soundPlayed = true;
+                }
             }
         }.start();
 
         isPaused = false;
-        resetButton.setEnabled(true);
-        soundPlayed = false;
-    }
-
-    private void playAlertSound() {
-        MediaPlayer mediaPlayer = MediaPlayer.create(LpCalculatorActivity.this, R.raw.time); // Alterado de piano para time
-        mediaPlayer.setOnCompletionListener(mp -> mp.release());
-        mediaPlayer.start();
     }
 
     private void pauseTimer() {
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-            countDownTimer = null;
-        }
-
+        countDownTimer.cancel();
         isPaused = true;
     }
 
     private void resumeTimer() {
         startTimer();
+        isPaused = false;
     }
+
 
     private void resetTimer() {
         if (countDownTimer != null) {
@@ -146,61 +203,44 @@ public class LpCalculatorActivity extends AppCompatActivity {
     }
 
     private void updateTimer() {
-        int minutes = (int) timeLeft / 60000;
-        int seconds = (int) timeLeft % 60000 / 1000;
+        int minutes = (int) (timeLeft / 1000) / 60;
+        int seconds = (int) (timeLeft / 1000) % 60;
+        String timeFormatted = String.format("%02d:%02d", minutes, seconds);
+        timerView.setText(timeFormatted);
 
-        String timeLeftText = String.format("%02d:%02d", minutes, seconds);
-        timerView.setText(timeLeftText);
-    }
-
-    private void openDialog(final boolean isAdding, final int playerIndex) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(isAdding ? "Enter the gain" : "Enter the damage");
-
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        builder.setView(input);
-
-        builder.setPositiveButton("OK", (dialog, which) -> processInputValue(input.getText().toString(), isAdding, playerIndex));
-        builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
-
-        AlertDialog dialog = builder.create();
-
-        input.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
-                return true;
-            }
-            return false;
-        });
-
-        dialog.show();
-    }
-
-    private void processInputValue(String inputValue, boolean isAdding, int playerIndex) {
-        if (!inputValue.isEmpty()) {
-            int value = Integer.parseInt(inputValue);
-            if (isAdding) {
-                addLifePoints(playerIndex, value);
-            } else {
-                subtractLifePoints(playerIndex, value);
-            }
+        if (timeLeft <= 10000) { // 10 segundos ou menos
+            timerView.setTextColor(getResources().getColor(android.R.color.holo_red_dark)); // Define a cor do texto para vermelho
         } else {
-            Toast.makeText(LpCalculatorActivity.this, "Please, insert a value", Toast.LENGTH_SHORT).show();
+            timerView.setTextColor(getResources().getColor(android.R.color.white)); // Volta para a cor padrão se maior que 10 segundos
         }
     }
 
-    private void updateLifePoints(int playerIndex) {
-        lifePointViews[playerIndex].setText(String.valueOf(lifePoints[playerIndex]));
+    private void resetGame() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Reset Game");
+        builder.setMessage("Are you sure you want to reset the game?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Lógica de reset do jogo
+                for (int i = 0; i < lifePoints.length; i++) {
+                    lifePoints[i] = 8000;
+                    updateLifePoints(i);
+                }
+                resetTimer();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
-    private void addLifePoints(int playerIndex, int points) {
-        lifePoints[playerIndex] += points;
-        updateLifePoints(playerIndex);
-    }
-
-    private void subtractLifePoints(int playerIndex, int points) {
-        lifePoints[playerIndex] -= points;
-        updateLifePoints(playerIndex);
-    }
 }
