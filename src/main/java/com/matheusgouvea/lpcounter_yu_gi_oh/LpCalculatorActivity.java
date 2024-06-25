@@ -151,6 +151,7 @@ public class LpCalculatorActivity extends AppCompatActivity {
         input.requestFocus(); // Request focus for the input
 
         dialog.show();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     private void startTimer() {
